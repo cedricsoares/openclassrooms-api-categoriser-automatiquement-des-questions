@@ -1,0 +1,9 @@
+gensim==4.0.1
+nltk==3.6.2
+lxml==4.6.3
+html5lib==1.1
+beautifulsoup4==4.9.3
+fastapi==0.68.1
+Flask==2.0.1
+flask_sqlalchemy==2.5.1
+pydantic==1.8.2
