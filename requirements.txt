@@ -1,8 +1,8 @@
-uvicorn
-gensim==4.0.1
-nltk==3.6.2
+uvicorn==0.15.0
 lxml==4.6.3
 html5lib==1.1
 beautifulsoup4==4.9.3
 fastapi==0.68.1
 pydantic==1.8.2
+gensim==4.0.1
+nltk==3.6.2
