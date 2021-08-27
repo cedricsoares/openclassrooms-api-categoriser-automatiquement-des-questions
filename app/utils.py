@@ -128,24 +128,24 @@ class SupervisedModel:
         self.vocabulary = pickle.locad(open(filename_vocabulary, 'rb'))
 
     def predict_tags(self, supervised_model, mlb_model, text):
-    """
-    Predict tags according to a lemmatized text using a supervied model.
-    
-    Args:
-        supervised_model(): Used mode to get prediction
-        mlb_model(): Used model to detransform
-    Returns:
-        res(list): List of predicted tags
-    """
-    input_vector = self.tfidf_model.transform(text)
-    input_vector = pd.DataFrame(res.toarray(), columns=self.vocabulary)
-    input_vector = self.pca_model.transform(input_vector)
-    res = self.supervised_model.predict(input_vector)
-    res = self.mlb_model.inverse_transform(res)
-    res = list({tag for tag_list in res for tag in tag_list if (len(tag_list) != 0)})
-    res = [tag for tag  in res if tag in text]
-    
-    return predicted_tags
+        """
+        Predict tags according to a lemmatized text using a supervied model.
+        
+        Args:
+            supervised_model(): Used mode to get prediction
+            mlb_model(): Used model to detransform
+        Returns:
+            res(list): List of predicted tags
+        """
+        input_vector = self.tfidf_model.transform(text)
+        input_vector = pd.DataFrame(res.toarray(), columns=self.vocabulary)
+        input_vector = self.pca_model.transform(input_vector)
+        res = self.supervised_model.predict(input_vector)
+        res = self.mlb_model.inverse_transform(res)
+        res = list({tag for tag_list in res for tag in tag_list if (len(tag_list) != 0)})
+        res = [tag for tag  in res if tag in text]
+        
+        return predicted_tags
         
 class LdaModel:
 
