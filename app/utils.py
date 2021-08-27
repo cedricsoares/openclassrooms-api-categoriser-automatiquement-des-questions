@@ -138,7 +138,7 @@ class SupervisedModel:
             res(list): List of predicted tags 
         """
         input_vector = self.tfidf_model.transform(text)
-        input_vector = pd.DataFrame(res.toarray(), columns=self.vocabulary)
+        input_vector = pd.DataFrame(input_vector.toarray(), columns=self.vocabulary)
         input_vector = self.pca_model.transform(input_vector)
         res = self.supervised_model.predict(input_vector)
         res = self.mlb_model.inverse_transform(res)
