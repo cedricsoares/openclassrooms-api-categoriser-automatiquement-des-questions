@@ -179,7 +179,7 @@ class LdaModel:
         #retrieve associated to topic tags present in submited text
         res = self.model.get_topic_terms(topicid=relevant_topic, topn=20)
         
-        res = [self.dictionary[tag[0]] for tag in potential_tags if self.dictionary[tag[0]] in text]
+        res = [self.dictionary[tag[0]] for tag in res if self.dictionary[tag[0]] in text]
         
         return res
 
