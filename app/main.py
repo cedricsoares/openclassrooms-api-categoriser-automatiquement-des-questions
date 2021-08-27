@@ -29,7 +29,7 @@ async def get_prediction(data: Input):
     supervised_pred = supervised_model.predict_tags(lemmatized_text)
     text = jsonable_encoder(data.text)
 
-    return JSONResponse(status_code=200, content={"text": text, \
-                                                  "unsupervised_tags": unsupervised_pred, \ 
+    return JSONResponse(status_code=200, content={"text": text, 
+                                                  "unsupervised_tags": unsupervised_pred,  
                                                   "supervised_tags": supervised_pred})
 
