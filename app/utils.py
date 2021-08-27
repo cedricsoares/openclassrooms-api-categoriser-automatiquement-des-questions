@@ -127,7 +127,7 @@ class SupervisedModel:
         self.pca_model = pickle.load(open(filename_pca_model, 'rb'))
         self.vocabulary = pickle.load(open(filename_vocabulary, 'rb'))
 
-    def predict_tags(self, supervised_model, mlb_model, text):
+    def predict_tags(text):
         """
         Predict tags according to a lemmatized text using a supervied model.
         
