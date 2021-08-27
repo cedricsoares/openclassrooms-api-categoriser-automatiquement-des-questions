@@ -127,7 +127,7 @@ class SupervisedModel:
         self.pca_model = pickle.load(open(filename_pca_model, 'rb'))
         self.vocabulary = pickle.load(open(filename_vocabulary, 'rb'))
 
-    def predict_tags(text):
+    def predict_tags(self, text):
         """
         Predict tags according to a lemmatized text using a supervied model.
         
@@ -135,7 +135,7 @@ class SupervisedModel:
             supervised_model(): Used mode to get prediction
             mlb_model(): Used model to detransform
         Returns:
-            res(list): List of predicted tags
+            res(list): List of predicted tags 
         """
         input_vector = self.tfidf_model.transform(text)
         input_vector = pd.DataFrame(res.toarray(), columns=self.vocabulary)
