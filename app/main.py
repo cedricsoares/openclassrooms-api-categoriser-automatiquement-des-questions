@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from .utils import clean_html, text_cleaning, tokenize, filtering_nouns, lemmatize, LdaModel
+from .utils import clean_html, text_cleaning, tokenize, filtering_nouns, lemmatize, LdaModel, SupervisedModel
 
 app = FastAPI(title='API for tags prediction on Stack Overflow posts',
               description='Return tags related to a poste',
