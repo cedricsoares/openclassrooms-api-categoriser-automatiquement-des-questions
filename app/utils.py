@@ -1,3 +1,4 @@
+import pandas as pd
 import lxml
 import html5lib
 import re
@@ -8,7 +9,6 @@ from nltk.corpus import stopwords
 from nltk import word_tokenize
 from nltk.tokenize import sent_tokenize
 from nltk.stem import WordNetLemmatizer
-import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MultiLabelBinarizer
