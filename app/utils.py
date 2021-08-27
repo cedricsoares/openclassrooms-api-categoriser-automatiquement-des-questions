@@ -8,6 +8,12 @@ from nltk.corpus import stopwords
 from nltk import word_tokenize
 from nltk.tokenize import sent_tokenize
 from nltk.stem import WordNetLemmatizer
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import MultiLabelBinarizer
+from sklearn.svm import LinearSVC
+from sklearn.multiclass import OneVsRestClassifier
 import gensim
 import gensim.corpora as corpora
 from gensim import models
@@ -106,6 +112,41 @@ def lemmatize(tokens):
         
     return lemmatized
 
+class SupervisedModel:
+
+    def __init__(self):
+        filename_supervised_model = "./models/svm_model.pkl"
+        filename_mlb_model = "./models/mlb_model.pkl"
+        filename_tfidf_model = "./models/tfidf_model.pkl"
+        filename_pca_model = "./models/pca_model.pkl"
+        filename_vocabulary = "./models/vocabulary.pkl"
+
+        self.supervised_model = pickle.load(open(filename_supervised_model, 'rb'))
+        self.mlb_model = pickle.load(open(filename_mlb_model, 'rb'))
+        self.tfidf_model = pickle.load(open(filename_tfidf_mdel, 'rb'))
+        self.pca_model = pickle.load(open(filename_pca_mdel, 'rb'))
+        self.vocabulary = pickle.locad(open(filename_vocabulary, 'rb'))
+
+    def predict_tags(self, supervised_model, mlb_model, text):
+    """
+    Predict tags according to a lemmatized text using a supervied model.
+    
+    Args:
+        supervised_model(): Used mode to get prediction
+        mlb_model(): Used model to detransform
+    Returns:
+        res(list): List of predicted tags
+    """
+    input_vector = self.tfidf_model.transform(text)
+    input_vector = pd.DataFrame(res.toarray(), columns=self.vocabulary)
+    input_vector = self.pca_model.transform(input_vector)
+    res = self.supervised_model.predict(input_vector)
+    res = self.mlb_model.inverse_transform(res)
+    res = list({tag for tag_list in res for tag in tag_list if (len(tag_list) != 0)})
+    res = [tag for tag  in res if tag in text]
+    
+    return predicted_tags
+        
 class LdaModel:
 
     def __init__(self):
@@ -121,7 +162,7 @@ class LdaModel:
         Args:
             text(list): preprocessed text
         Returns:
-            relevant_tags(list): list of tags
+            res(list): list of tags
         """
         corpus_new = self.dictionary.doc2bow(text)
         topics = self.model.get_document_topics(corpus_new)
@@ -136,8 +177,9 @@ class LdaModel:
                 relevant_topic_prob = topics[i][1]
                 
         #retrieve associated to topic tags present in submited text
-        potential_tags = self.model.get_topic_terms(topicid=relevant_topic, topn=20)
+        res = self.model.get_topic_terms(topicid=relevant_topic, topn=20)
         
-        relevant_tags = [self.dictionary[tag[0]] for tag in potential_tags if self.dictionary[tag[0]] in text]
+        res = [self.dictionary[tag[0]] for tag in potential_tags if self.dictionary[tag[0]] in text]
         
-        return relevant_tags 
+        return res
+

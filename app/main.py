@@ -23,9 +23,13 @@ async def get_prediction(data: Input):
     tokenized_text = tokenize(cleaned_text)
     filtered_noun_text = filtering_nouns(tokenized_text)
     lemmatized_text = lemmatize(filtered_noun_text)
-    model = LdaModel()
-    pred = model.predict_tags(lemmatized_text)
+    lda_model = LdaModel()
+    unsupervised_pred = lda_model.predict_tags(lemmatized_text)
+    supervised_model = SupervisedModel()
+    supervised_pred = supervised_model.predict_tags(lemmatized_text)
     text = jsonable_encoder(data.text)
 
-    return JSONResponse(status_code=200, content={"text": text, "tags": pred })
+    return JSONResponse(status_code=200, content={"text": text, \
+                                                  "unsupervised_tags": unsupervised_pred, \ 
+                                                  "supervised_tags": supervised_pred})
 
