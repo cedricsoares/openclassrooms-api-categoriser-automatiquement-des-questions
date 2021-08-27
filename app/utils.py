@@ -145,7 +145,7 @@ class SupervisedModel:
         res = list({tag for tag_list in res for tag in tag_list if (len(tag_list) != 0)})
         res = [tag for tag  in res if tag in text]
         
-        return predicted_tags
+        return res
         
 class LdaModel:
 
