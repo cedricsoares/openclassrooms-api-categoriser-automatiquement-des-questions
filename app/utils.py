@@ -125,7 +125,7 @@ class SupervisedModel:
         self.mlb_model = pickle.load(open(filename_mlb_model, 'rb'))
         self.tfidf_model = pickle.load(open(filename_tfidf_model, 'rb'))
         self.pca_model = pickle.load(open(filename_pca_model, 'rb'))
-        self.vocabulary = pickle.locad(open(filename_vocabulary, 'rb'))
+        self.vocabulary = pickle.load(open(filename_vocabulary, 'rb'))
 
     def predict_tags(self, supervised_model, mlb_model, text):
         """
