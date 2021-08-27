@@ -123,7 +123,7 @@ class SupervisedModel:
 
         self.supervised_model = pickle.load(open(filename_supervised_model, 'rb'))
         self.mlb_model = pickle.load(open(filename_mlb_model, 'rb'))
-        self.tfidf_model = pickle.load(open(filename_tfidf_mdel, 'rb'))
+        self.tfidf_model = pickle.load(open(filename_tfidf_model, 'rb'))
         self.pca_model = pickle.load(open(filename_pca_mdel, 'rb'))
         self.vocabulary = pickle.locad(open(filename_vocabulary, 'rb'))
 
